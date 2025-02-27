@@ -33,7 +33,7 @@ class BidRequest extends FormRequest
                     if (!isset($value)){
                         $fail('The bid price is required!');
                     }
-                    else if (preg_match('/^\d+\.\d{2}$/', $value) !== 1) {
+                    else if (!preg_match('/^\d+(\.\d{1,2})?$/', $value)) {
                         $fail('The price format is invalid.');
                     }
                     else if ($value <= $highestBid){

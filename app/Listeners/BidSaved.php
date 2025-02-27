@@ -37,8 +37,8 @@ class BidSaved implements ShouldQueue
     {
         User::chunk(20, function($users){
             foreach ($users as $user) {
-                $user_last_bid = Bid::where('user_id', $user->id)->latest('created_at')->first();
-                $highest_bid_price = Bid::latest('created_at')->first()->price;
+                $user_last_bid = Bid::where('user_id', $user->id)->latest()->first();
+                $highest_bid_price = Bid::orderBy('price', 'desc')->first()->price;
 
                 $notificationData = [
                     'latest_bid_price' => strval(number_format($highest_bid_price, 2, '.', '')),

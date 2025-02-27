@@ -18,4 +18,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('bid', [BidController::class, 'create'])->name('bid.create');
+Route::post('bid', [BidController::class, 'create'])->name('bid.create')->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
